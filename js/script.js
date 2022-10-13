@@ -30,9 +30,39 @@ let itemsList = "";
 for (let i = 0; i < images.length; i ++) {
     itemsList += `
             <div class="item">
-                <img src="${images[1]}" alt="" />
+                <img src="${images[i]}" alt="" />
             </div> `;
 }
 itemsContainer.innerHTML = itemsList;
 
-console.log(itemsContainer);
+
+const sliderItems = document.getElementsByClassName("item");
+let activeItem = 0;
+sliderItems[activeItem].classList.add("active");
+
+const next = document.querySelector(".next");
+next.addEventListener("click", function() {
+    sliderItems[activeItem].classList.remove("active");
+    
+    if(activeItem < sliderItems.length -1){
+        activeItem++;
+    }else{
+        activeItem = 0;
+    }
+
+    sliderItems[activeItem].classList.add("active");
+    console.log(next);
+});
+
+const prev = document.querySelector(".prev");
+prev.addEventListener("click", function() {
+    sliderItems[activeItem].classList.remove("active");
+    if(activeItem > 0) {
+        activeItem--;
+    }else{
+        activeItem = sliderItems.length -1;
+    }
+    sliderItems[activeItem].classList.add("active");
+});
+
+
